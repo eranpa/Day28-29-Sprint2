@@ -4,14 +4,14 @@
 
 /* BASE */
 @import 'basic/base.css';
-@import 'basic/layout.css';
+/* @import 'basic/layout.css'; */
 @import 'basic/helpers.css';
 
 /* COMPONENTS */
 @import 'components/main-header.css';
-@import 'components/card.css';
-@import 'components/newsletter.css';
-@import 'components/screen.css';
+@import 'components/gallery.css';
+@import 'components/canvas.css';
+/* @import 'components/screen.css'; */
 
 /* Media Queries */
-@import 'mq/mq.css';
+/* @import 'mq/mq.css'; */

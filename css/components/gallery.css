@@ -1,0 +1,19 @@
+.gallery-section{
+    max-width: 1600px;
+    padding: 50px 20px;
+    margin: 0 auto;
+    font-family: impact;
+
+}
+.gallery-container{
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    grid-gap: 10px;
+}
+
+.gallery-image{
+    max-width: 100%;
+    border-radius: 10px;
+    position: relative;
+    transition: transform 200ms;
+    cursor: pointer;
+}
