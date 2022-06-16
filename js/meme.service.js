@@ -1,6 +1,27 @@
 'use strict'
 
-var gMeme = {}
+var gMeme
+function createGMeme() {
+    gMeme = {
+        selectedImgId: -1,
+        selectedLineIdx: 0,
+        lines: [{
+            txt: 'this is the first line',
+            size: 20,
+            align: 'left',
+            color: '#ffffff',
+            pos: { x: 50, y: 50 }
+        },
+        {
+            txt: 'This is the second line',
+            size: 20,
+            align: 'left',
+            color: '#ffffff',
+            pos: { x: 50, y: 400 }
+        }
+        ]
+    }
+}
 
 var gImgs = [{ id: 1, url: '/images/meme-images/1.jpg', keywords: ['trump', 'politics'] },
 { id: 2, url: '/images/meme-images/2.jpg', keywords: ['trump', 'politics'] },
@@ -23,7 +44,7 @@ var gImgs = [{ id: 1, url: '/images/meme-images/1.jpg', keywords: ['trump', 'pol
 
 
 
-function setImg(imgId){
+function setImg(imgId) {
     gMeme.selectedImgId = imgId
     console.log('gMeme.selectedImgId', gMeme.selectedImgId)
 }
@@ -36,3 +57,36 @@ function getImgSrcById(imgId) {
     var img = gImgs.find(img => img.id === imgId)
     return img.url
 }
+
+function setLineText(text, lineNum) {
+    gMeme.lines[lineNum].text = text
+}
+
+function setColor(color = '#ffffff') {
+    gMeme.lines[gMeme.selectedLineIdx].color = color
+    // console.log('picked color: ', gMeme.lines[gMeme.selectedLineIdx].color)
+}
+
+function changeFontSize(val) {
+    gMeme.lines[gMeme.selectedLineIdx].size += val
+    console.log('font size ', gMeme.lines[gMeme.selectedLineIdx].size)
+
+}
+
+function changeLine(val) {
+    var i = gMeme.selectedLineIdx + val
+    var n = gMeme.lines.length
+    gMeme.selectedLineIdx = (i % n + n) % n
+}
+
+function updateLine(ev) { 
+    var line =  gMeme.lines[gMeme.selectedLineIdx]
+    var text = document.getElementById('item').value
+    line.txt = text 
+}
+
+// function updateLineText(event) {
+//     var line = gMeme.lines[gMeme.selectedLineIdx]
+//     var text = document.getElementById('item').value
+//     line.txt = text
+// }

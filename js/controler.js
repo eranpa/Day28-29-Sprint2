@@ -10,6 +10,7 @@ function init() {
     // renderMeme('no no no')
     gElGallery = document.querySelector('.gallery-container')
     renderGallery()
+    createGMeme()
 }
 
 function renderGallery(){
@@ -33,13 +34,21 @@ function renderMeme() {
         img.src = getImgSrcById(meme.selectedImgId)
     img.onload = () => {
         gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height);
-        drawLineFrame()
-        
-        // drawText(meme.lines[0].text)
-        drawText()
+        gMeme.lines.forEach(line => {
+            drawText(line)
+        })
+            
     }
 }
 
+function onNewKey(ev){
+    updateLine(ev)
+    // var line =  gMeme.lines[gMeme.selectedLineIdx]
+    // var text = document.getElementById('item').value
+    // line.txt = text 
+    renderMeme()
+    // drawText(gMeme.lines[0].txt)
+}
 
 function drawLineFrame() {
     gCtx.beginPath();
@@ -48,14 +57,15 @@ function drawLineFrame() {
     gCtx.stroke();
 }
 
-function drawText(text = 'this is some default text') {
-    
+function drawText(line) {
+    var strFont = `${line.size}px impact`
+    var text = line.txt
     gCtx.lineWidth = 2;
-    gCtx.strokeStyle = 'black';
-    gCtx.fillStyle = 'white';
-    gCtx.font = '40px impact';
-    gCtx.fillText(text, 50, 50);//Draws (fills) a given text at the given (x, y) position.
-    gCtx.strokeText(text, 50, 50);//Draws (strokes) a given text at the given (x, y) position
+    gCtx.strokeStyle = 'black'
+    gCtx.fillStyle = line.color
+    gCtx.font = strFont 
+    gCtx.fillText(text, line.pos.x, line.pos.y);//Draws (fills) a given text at the given (x, y) position.
+    gCtx.strokeText(text, line.pos.x, line.pos.y);//Draws (strokes) a given text at the given (x, y) position
 }
 
 function onImgSelect(imgId){
@@ -63,6 +73,18 @@ function onImgSelect(imgId){
     setImg(imgId)
     // renderEditor()
      renderMeme()
+}
 
+function OnChangeFontSize(val){
+    changeFontSize(val)
+    renderMeme()
+}
 
+function onSetColor(color) { 
+    setColor(color)
+    renderMeme()
+}
+
+function OnChangeLine (val){
+    changeLine(val)
 }

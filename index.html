@@ -26,17 +26,29 @@
        
     </div>
     </section>
-
-    <section class="canvas-container flex align-center">
-        
+    
+    <section class="editor grid">
+        <div class="canvas-container flex align-center">            
             <canvas
-              id="my-canvas"
-              height="500"
-              width="500"
-             
-            ></canvas>
-    </section>
+            id="my-canvas" height="500" width="500"></canvas>
+        </div>
+        
+        <div class="controls flex" height="500" width="500" >
+            <input type="text" id="item" onkeyup="onNewKey()" placeholder="your text here">
+            <div class="controler font">
+                font size: 
+            <button class="font-size-btn" onclick="OnChangeFontSize(1)">↑</button>
+            <button class="font-size-btn" onclick="OnChangeFontSize(-1)">↓</button>
+            </div>
+            <div class="controler line-picker"> 
+            <button class="line-btn" onclick="OnChangeLine(1)">↑</button>
+            <button class="line-btn" onclick="OnChangeLine(-1)">↓</button>
+            </div>
 
+            color:
+            <input type="color" value="#ffffff" onchange="onSetColor(this.value)">
+        </div>
+    </section>
     
     <script src="js/meme.service.js"></script>
     <script src="js/controler.js"></script>
