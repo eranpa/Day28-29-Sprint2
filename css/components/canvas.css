@@ -1,9 +1,16 @@
 .editor{
     margin: 0 auto;
     text-align: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 130px;
 }
 
 .canvas-container{
     font-family: impact;
+    /* outline: 0.5px solid black; */
+    /* border-radius:8%; */
 
 }
+
+

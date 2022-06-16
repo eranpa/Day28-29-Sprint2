@@ -96,3 +96,8 @@ function changeLinePos(val) {
   
     // console.log(lineHeight) 
 }
+
+function getCurrLine(){
+    return gMeme.lines[gMeme.selectedLineIdx]
+
+}

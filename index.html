@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,56 +8,74 @@
     <title>MemeGen</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body onload="init()">
-    <header class="main-header flex space-between">
-        <div class="main-logo">
-            <img src="/images/misc/LOGO.png" alt="" class="main-logo">
-        </div>
-        <div class="nav-bar">
-            <ul class="nav flex clean-list space-between">
-                <li class="gallery">gallery</li>
-                <li class="about">about</li>
-            </ul>
-        </div>
-    </header>
+
+    <section class="header-container">
+        <header class="main-header main-layout flex align-center space-between">
+            <div class="main-logo"><img src="./images/misc/LOGO.png" alt=""></div>
+            <ul class="main-nav flex clen-list align-center space-around">
+                <li class="nav-link flex align-center"> <a href="">About</a></li>
+                <li class="nav-link flex align-center"> <a href="">Gallery</a></li>
+                <li class="nav-link flex align-center"> <a href="">saved</a></li>
+
+                <!-- <button class="menu-toggle-btn hidden" onclick="toggleMenu()">☰</button> -->
+        </header>
+
+    </section>
 
     <section class="gallery-section">
-        wow wow
-        <div class="gallery-container grid">
-       
-    </div>
+        <span>.</span>
+        <div class="gallery-container grid"></div>
     </section>
-    
-    <section class="editor grid">
-        <div class="canvas-container flex align-center">            
-            <canvas
-            id="my-canvas" height="500" width="500"></canvas>
+
+
+    <section class="editor flex align-center space-around hidden">
+        <div class="canvas-container flex align-center">
+            <canvas id="my-canvas" height="500" width="500" border-radius="8%"></canvas>
         </div>
-        
-        <div class="controls flex" height="500" width="500" >
-            <input type="text" id="item" onkeyup="onNewKey()" placeholder="Your text here">
-            <div class="controler font">
-                font size: 
-            <button class="font-size-btn" onclick="OnChangeFontSize(1)">↑</button>
-            <button class="font-size-btn" onclick="OnChangeFontSize(-1)">↓</button>
-            </div>
-            <div class="controler line-picker"> 
-                change line:
-            <button class="line-btn" onclick="OnChangeLine(1)">↑</button>
-            <button class="line-btn" onclick="OnChangeLine(-1)">↓</button>
-            </div>
-            <div class="controler move-line"> 
-                move line:
-            <button class="line-move-btn" onclick="OnMoveLine(-1)">↑</button>
-            <button class="line-move-btn" onclick="OnMoveLine(1)">↓</button>
+
+
+        <div class="controls flex" height="500" width="500">
+
+            <input class="controller line-input" type="text" id="item" onkeyup="onNewKey()"
+                placeholder="Your text here">
+
+            <div class="controller"> <button class="font-size-btn-up btn-round"
+                    onclick="OnChangeFontSize(1)">A+</button></div>
+            <div class="controller"> <button class="font-size-btn-down btn-round"
+                    onclick="OnChangeFontSize(-1)">A-</button></div>
+
+            <div class="controller"><button class="btn-round change-line-btn" onclick="OnChangeLine(1)">↑↓</button>
             </div>
 
-            color:
-            <input type="color" value="#ffffff" oninput="onSetColor(this.value)">
+
+            <div class="controller"><button class="btn-round remove-line-btn" onclick="OnRemoveLine()">&#128465</button>
+            </div>
+
+            <div class="controller"><button class="btn-round addline-btn" onclick="OnAddLine()">+</button>
+            </div>
+            <div class="controller"><button class="line-move-btn-up btn-round" onclick="OnMoveLine(-1)">↑</button></div>
+            <div class="controller"><button class="line-move-btn-down btn-round" onclick="OnMoveLine(1)">↓</button>
+            </div>
+
+            <div class="btn-round">color: <input class="controller color-input" type="color" value="#ffffff"
+                    oninput="onSetColor(this.value)"></div>
+
         </div>
     </section>
-    
+
+    <footer class="footer">
+        <div class="main-logo"><img src="./images/misc/LOGO.png" alt=""></div>
+        <h1> &#169 Eran Pascal for Coding Academy</h1>
+
+
+
+
+    </footer>
+
     <script src="./js/meme.service.js"></script>
     <script src="./js/controler.js"></script>
 </body>
+
 </html>

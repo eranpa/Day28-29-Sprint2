@@ -1,12 +1,12 @@
 .gallery-section{
     max-width: 1600px;
-    padding: 50px 20px;
+    /* padding: 50px 20px; */
     margin: 0 auto;
     font-family: Impact;
 
 }
 .gallery-container{
-    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     grid-gap: 10px;
 }
 

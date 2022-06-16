@@ -1,4 +1,60 @@
 .controls { 
-    border: 2px solid black;
-    background-color: aquamarine;
+    box-sizing: border-box;
+  
+    height: 500px;
+    width: 500px;
+    border-radius: 8%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    /* grid-template-columns: repeat(9 ,1fr);
+    grid-template-rows:repeat(9 ,1fr);
+    grid-gap: 10px;  */
 }
+
+input[type=color]{
+	width: 60px;
+	height: 60px;
+	border: none;
+	border-radius: 40px;
+	background: none;
+}
+
+.btn-round {    
+    align-self: flex-start;
+    border: none;
+    font-family: "montserrat", sans-serif;
+    color: var(--clr4);
+    background-color: var(--clr3);
+    border-radius: 1em;
+    font-weight: 950;
+    font-size: 3em;
+    padding: 0 0.8em;
+    line-height: 2em;
+    cursor: pointer;
+}
+
+.controller.line-input{
+    width: 470px;
+    height: fit-content;
+}
+
+
+/*  
+.controls .controller.font-size-btn-down{
+    grid-row: 4 / span 2;
+    grid-column: 1 / span 2;
+    background-color: bisque;
+}
+
+.controls .controller.font-size-btn-up{
+    grid-row: 4 / span 2;
+    grid-column: 3 / span 6;
+    background-color: bisque;
+}
+
+.controls .controller.font-size-btn-up{
+    grid-row: 4 / span 2;
+    grid-column: 3 / span 6;
+    background-color: bisque;
+} */

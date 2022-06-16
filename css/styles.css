@@ -12,6 +12,9 @@
 @import 'components/gallery.css';
 @import 'components/canvas.css';
 @import 'components/controls.css';
+@import 'components/fa-btns.css';
+@import 'components/footer.css';
 
-/* Media Queries */
-/* @import 'mq/mq.css'; */
+
+/* Media Queries  */
+ @import 'mq/mq.css'; 

@@ -1,11 +1,22 @@
 /* montserrat */
 @font-face {
     font-family: montserrat;
-    src: url(./fonts/Montserrat-VariableFont_wght.ttf);
+    src: url(/fonts/Montserrat-VariableFont_wght.ttf)
 }
 /* impact */
 @font-face {
     font-family: impact;
-    src: url(./fonts/impact.ttf);
+    src: url(/fonts/impact.ttf);
+}
+
+
+@font-face {
+    font-family: fa; 
+    src: url(/fonts/fa/fa-regular-400.woff2);
+}
+
+@font-face {
+    font-family: fa-solid; 
+    src: url(/fonts/fa/fa-solid-900.ttf);
 }
 

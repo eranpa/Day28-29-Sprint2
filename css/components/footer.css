@@ -1,0 +1,20 @@
+footer{
+    position: absolute;
+    /* bottom: 0; */
+    background-color: var(--clr1);
+    text-align: center;
+    /* margin: 0; */
+    width: 100vw;;
+}
+
+footer .main-logo{
+    padding: 10px;
+}
+
+footer h1{
+    color: var(--clr3);
+    font-family: 'impact';
+    /* text-align: center; */
+    font-size:1rem;
+    padding: 15px;
+}
