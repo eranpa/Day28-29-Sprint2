@@ -42,20 +42,17 @@ function renderMeme() {
 }
 
 function onNewKey(ev){
-    updateLine(ev)
-    // var line =  gMeme.lines[gMeme.selectedLineIdx]
-    // var text = document.getElementById('item').value
-    // line.txt = text 
+    updateLine(ev)  
     renderMeme()
-    // drawText(gMeme.lines[0].txt)
 }
 
-function drawLineFrame() {
-    gCtx.beginPath();
-    gCtx.rect(47, 20, 400, 40);
-    gCtx.strokeStyle = 'white';
-    gCtx.stroke();
-}
+// function drawLineFrame() {
+//     gCtx.beginPath();
+//     gCtx.rect(47, 20, 400, 40);
+//     gCtx.strokeStyle = 'white';
+//     gCtx.stroke();
+// }
+
 
 function drawText(line) {
     var strFont = `${line.size}px impact`
@@ -87,4 +84,12 @@ function onSetColor(color) {
 
 function OnChangeLine (val){
     changeLine(val)
+     
+     document.getElementById('item').value = gMeme.lines[gMeme.selectedLineIdx].txt
+    }
+
+
+function OnMoveLine(val) { 
+    changeLinePos(val)
+    renderMeme()
 }

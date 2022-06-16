@@ -34,19 +34,25 @@
         </div>
         
         <div class="controls flex" height="500" width="500" >
-            <input type="text" id="item" onkeyup="onNewKey()" placeholder="your text here">
+            <input type="text" id="item" onkeyup="onNewKey()" placeholder="Your text here">
             <div class="controler font">
                 font size: 
             <button class="font-size-btn" onclick="OnChangeFontSize(1)">↑</button>
             <button class="font-size-btn" onclick="OnChangeFontSize(-1)">↓</button>
             </div>
             <div class="controler line-picker"> 
+                change line:
             <button class="line-btn" onclick="OnChangeLine(1)">↑</button>
             <button class="line-btn" onclick="OnChangeLine(-1)">↓</button>
             </div>
+            <div class="controler move-line"> 
+                move line:
+            <button class="line-move-btn" onclick="OnMoveLine(-1)">↑</button>
+            <button class="line-move-btn" onclick="OnMoveLine(1)">↓</button>
+            </div>
 
             color:
-            <input type="color" value="#ffffff" onchange="onSetColor(this.value)">
+            <input type="color" value="#ffffff" oninput="onSetColor(this.value)">
         </div>
     </section>
     
