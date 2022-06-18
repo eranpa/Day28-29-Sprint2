@@ -22,8 +22,6 @@
     justify-content: space-around;
 }
 
-
-
 .clean-list {
     margin: 0;
     padding: 0;
@@ -37,3 +35,16 @@
 .hidden{
     display: none;
 }
+
+.btn-round {
+
+    border: none;
+
+    color: var(--clr4);
+    background-color: var(--clr3);
+    border-radius: 1em;
+    font-weight: 950;
+    padding: 0 0.8em;
+    line-height: 2em;
+    cursor: pointer;
+} 

@@ -1,29 +1,14 @@
 'use strict'
+const gTouchEvs = ['touchstart', 'touchmove', 'touchend']
+var gStartPos
+var gImgs
+var gMemes = []
+const STORAGE_KEY = 'savedMemes'
+const PAGE_SIZE = 6
+var gPageIdx = 0
 
 var gMeme
-function createGMeme() {
-    gMeme = {
-        selectedImgId: -1,
-        selectedLineIdx: 0,
-        lines: [{
-            txt: 'Your text here',
-            size: 30,
-            align: 'left',
-            color: '#ffffff',
-            pos: { x: 50, y: 50 }
-        },
-        {
-            txt: 'Your text here',
-            size: 30,
-            align: 'left',
-            color: '#ffffff',
-            pos: { x: 50, y: 400 }
-        }
-        ]
-    }
-}
-
-var gImgs = [{ id: 1, url: './images/meme-images/1.jpg', keywords: ['trump', 'politics'] },
+gImgs = [{ id: 1, url: './images/meme-images/1.jpg', keywords: ['trump', 'politics'] },
 { id: 2, url: './images/meme-images/2.jpg', keywords: ['trump', 'politics'] },
 { id: 3, url: './images/meme-images/3.jpg', keywords: ['trump', 'politics'] },
 { id: 4, url: './images/meme-images/4.jpg', keywords: ['trump', 'politics'] },
@@ -43,7 +28,15 @@ var gImgs = [{ id: 1, url: './images/meme-images/1.jpg', keywords: ['trump', 'po
 { id: 18, url: './images/meme-images/18.jpg', keywords: ['trump', 'politics'] },]
 
 
-
+function createGMeme() {
+    gMeme = {
+        isDrag: false,
+        selectedImgId: -1,
+        selectedLineIdx: 0,
+        lines:[createLine('Your text here', { x: gCanvas.width / 10, y: gCanvas.height / 10 }),
+         createLine('Your text here', { x: gCanvas.width / 10, y: gCanvas.height - gCanvas.height / 10 })
+    ]}}
+        
 function setImg(imgId) {
     gMeme.selectedImgId = imgId
     console.log('gMeme.selectedImgId', gMeme.selectedImgId)
@@ -64,13 +57,10 @@ function setLineText(text, lineNum) {
 
 function setColor(color = '#ffffff') {
     gMeme.lines[gMeme.selectedLineIdx].color = color
-    // console.log('picked color: ', gMeme.lines[gMeme.selectedLineIdx].color)
 }
 
 function changeFontSize(val) {
     gMeme.lines[gMeme.selectedLineIdx].size += val
-    console.log('font size ', gMeme.lines[gMeme.selectedLineIdx].size)
-
 }
 
 function changeLine(val) {
@@ -79,25 +69,37 @@ function changeLine(val) {
     gMeme.selectedLineIdx = (i % n + n) % n
 }
 
-function updateLine(ev) { 
-    var line =  gMeme.lines[gMeme.selectedLineIdx]
-    var text = document.getElementById('item').value
-    line.txt = text 
+
+
+
+function getImgs() { 
+    var imgs
+    const startIdx = gPageIdx * PAGE_SIZE
+    imgs = gImgs.slice(startIdx, startIdx + PAGE_SIZE)
+    return imgs
 }
 
-// function updateLineText(event) {
-//     var line = gMeme.lines[gMeme.selectedLineIdx]
-//     var text = document.getElementById('item').value
-//     line.txt = text
-// }
+function nextPage() {
+    gPageIdx++
+    if (gPageIdx * PAGE_SIZE >= gImgs.length) {
+      gPageIdx = 0
+    }
+    window.scrollTo(0, 0)
+  }
 
-function changeLinePos(val) { 
-    gMeme.lines[gMeme.selectedLineIdx].pos.y += val
-  
-    // console.log(lineHeight) 
+function saveMeme(){ 
+    gMemes.push(gMeme)
+    _saveMemesToStorage()
 }
 
-function getCurrLine(){
-    return gMeme.lines[gMeme.selectedLineIdx]
+function _saveMemesToStorage() { 
+    localStorage.clear();
+    saveToStorage(STORAGE_KEY, gMemes)
+}
 
+function getMemes(){ 
+    var memes
+    const startIdx = gPageIdx * PAGE_SIZE
+    memes = gMemes.slice(startIdx, startIdx + PAGE_SIZE)
+    return memes
 }

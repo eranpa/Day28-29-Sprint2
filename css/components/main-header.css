@@ -40,7 +40,7 @@
 }  */
 
 
-.main-nav .nav-link a{
+.main-nav .nav-link.nav-btn{
     font-family: Montserrat;
     display: flex;
     color: var(--clr3);
@@ -52,13 +52,15 @@
     font-weight: 700;
 
 } 
+.menu-toggle-btn{
+    visibility: hidden;
+}
 
-
-.main-nav .nav-link a:hover{
+.main-nav .nav-link.nav-btn:hover{
     box-shadow: inset 0 -6px 0 var(--clr4);
     color: var(--clr4)
 }
-.main-nav .nav-link a.active{
+.main-nav .nav-link.nav-btn.active{
     box-shadow: inset 0 -6px 0 var(--clr4);
     color: var(--clr4);
     cursor: default;

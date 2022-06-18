@@ -1,10 +1,10 @@
-.gallery{
+.saved{
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.gallery-container{
+.saved-container{
   
     justify-content: center;
     font-family: Impact;
@@ -13,11 +13,11 @@
     /* margin-bottom: 2rem; */
 }
 
-.next-btn{ 
+.next-meme-btn{ 
     margin-top: 0.75rem;
     margin-bottom: 0.75rem;
 }
-.gallery-image{
+.gallery-image-container{
     max-width: 100%;
     border-radius: 10px;
     position: relative;

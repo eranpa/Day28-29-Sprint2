@@ -1,10 +1,11 @@
 footer{
-    position: absolute;
+    /* position: absolute; */
     /* bottom: 0; */
     background-color: var(--clr1);
     text-align: center;
     /* margin: 0; */
     width: 100vw;;
+    flex-shrink: 0;
 }
 
 footer .main-logo{
