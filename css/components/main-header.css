@@ -27,7 +27,7 @@
 
 .main-header .main-nav{
     flex-basis: 30%;
-    justify-content: space-between; 
+    justify-content: end; 
 }
 
 /* .main-nav li{

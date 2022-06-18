@@ -46,5 +46,17 @@ input[type=color] {
     justify-content: center;
     
 }
+.user-meg{
+    background-color: var(--clr1);
+    border-radius: 1em;
+    font-family: "montserrat", sans-serif;
+    color: var(--clr3);
+}
 
+.share-btn{
+    font-family: "montserrat", sans-serif;
+    background-color: #4267B2;
+    text-decoration: none;
+    color: var(--clr3);
+}
 

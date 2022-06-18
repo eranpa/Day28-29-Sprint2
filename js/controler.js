@@ -15,8 +15,9 @@ function init() {
     elGallery = document.querySelector('.gallery')
     gElEditor = document.querySelector('.editor')
     gElSaved = document.querySelector('.saved')
+    loadSavedMemes() 
     renderGallery()
-    createGMeme()
+    SetGMeme()
     addMouseListeners()
     addTouchListeners()
 }
@@ -38,15 +39,14 @@ function renderGallery() {
 
 }
 
-function renderMeme() {
-    var meme = getMeme()
+function renderMeme(meme = getMeme()) {
+ 
     var img = new Image()
-
     img.src = getImgSrcById(meme.selectedImgId)
     img.onload = () => {
         gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height)
         gMeme.lines.forEach((line, index) => {
-            drawText(line)
+            drawText(line, gCtx)
             if (gMeme.selectedLineIdx === index) drawLineFrame()
         })
     }
@@ -67,15 +67,15 @@ function drawLineFrame() {
 }
 
 
-function drawText(line) {
+function drawText(line, ctx) {
     var strFont = `${line.size}px "impact"`
     var text = line.txt
-    gCtx.lineWidth = 2
-    gCtx.strokeStyle = 'black'
-    gCtx.fillStyle = line.color
-    gCtx.font = strFont
-    gCtx.fillText(text, line.pos.x, line.pos.y)
-    gCtx.strokeText(text, line.pos.x, line.pos.y)
+    ctx.lineWidth = 2
+    ctx.strokeStyle = 'black'
+    ctx.fillStyle = line.color
+    ctx.font = strFont
+    ctx.fillText(text, line.pos.x, line.pos.y)
+    ctx.strokeText(text, line.pos.x, line.pos.y)
 }
 
 function onImgSelect(imgId) {
@@ -128,7 +128,11 @@ function clearGallery() {
         elGalleryContainer.removeChild(elGalleryContainer.firstChild)
     }
 }
-
+function clearSavedHtml() {
+    while (elSavedContainer.firstChild) {
+        elSavedContainer.removeChild(elSavedContainer.firstChild)
+    }
+}
 function toggleMenu() {
     document.body.classList.toggle('menu-open')
 }
@@ -188,32 +192,32 @@ function onSaved() {
 }
 
 function renderSavedMemes() {
-
+    clearSavedHtml()
     var memes = getMemes()
-    console.log(memes)
+
+    console.log('inside render', memes)
     memes.forEach((meme, index) => {
         const localCanvas = document.createElement('canvas')
-        localCanvas.id = 'memeCanvas'
-        localCanvas.height = 200
-        localCanvas.width = 200
-        localCanvas.classList.add('meme-canvas')
-        localCanvas.classList.add(`meme${index}`)
-        var elMemeCanvas = document.querySelector('meme-canvas')
-        var elMemeCtx =  localCanvas.getContext('2d')
         
+        localCanvas.height = 500
+        localCanvas.width = 500
+        localCanvas.id = 'memeCanvas'
+        var elMemeCanvas = document.querySelector('#memeCanvas')
+        var elMemeCtx = localCanvas.getContext('2d')
         var img = new Image()
         img.src = getImgSrcById(meme.selectedImgId)
         img.onload = () => {
+       
         elMemeCtx.drawImage(img, 0, 0, elMemeCanvas.width, elMemeCanvas.height)
-        meme.lines.forEach((line, index) => {
-            drawText(line)
-            // if (meme.selectedLineIdx === index) drawLineFrame()
+       
+        meme.lines.forEach((line) => {
+            drawText(line, elMemeCtx)
         })
     }
-        elSavedContainer.appendChild(canvas)
+        elSavedContainer.appendChild(localCanvas)
 
-        img.addEventListener('click', () => {
-            onMemeSelect(canvas.id)
+        localCanvas.addEventListener('click', () => {
+            onMemeSelect(gMemes[index])
         })
     })
 
@@ -221,7 +225,38 @@ function renderSavedMemes() {
 
 
 function onGallery(){
+    SetGMeme()
+    document.getElementById('item').value = ''
     elGallery.classList.remove('hidden')
     gElEditor.classList.add('hidden')
     gElSaved.classList.add('hidden')
+   clearShareMsg()
+}
+
+function onClear(){
+    console.log('clear')
+    clearSaved()
+
+}
+
+function clearSaved(){ 
+    localStorage.clear()
+    gMemes = []
+    renderSavedMemes()
+}
+
+function onMemeSelect(meme) { 
+    
+    elGallery.classList.add('hidden')
+    gElSaved.classList.add('hidden')
+    gElEditor.classList.remove('hidden')
+    gMeme = meme
+    renderMeme(meme)
+    }
+
+function clearShareMsg(){
+    document.querySelector('.user-msg').innerText = ''
+    
+    document.querySelector('.share-container').innerHTML = ''
+   
 }

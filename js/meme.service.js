@@ -28,15 +28,17 @@ gImgs = [{ id: 1, url: './images/meme-images/1.jpg', keywords: ['trump', 'politi
 { id: 18, url: './images/meme-images/18.jpg', keywords: ['trump', 'politics'] },]
 
 
-function createGMeme() {
+function SetGMeme() {
     gMeme = {
         isDrag: false,
         selectedImgId: -1,
         selectedLineIdx: 0,
-        lines:[createLine('Your text here', { x: gCanvas.width / 10, y: gCanvas.height / 10 }),
-         createLine('Your text here', { x: gCanvas.width / 10, y: gCanvas.height - gCanvas.height / 10 })
-    ]}}
-        
+        lines: [createLine('Your text here', { x: gCanvas.width / 10, y: gCanvas.height / 10 }),
+        createLine('Your text here', { x: gCanvas.width / 10, y: gCanvas.height - gCanvas.height / 10 })
+        ]
+    }
+}
+
 function setImg(imgId) {
     gMeme.selectedImgId = imgId
     console.log('gMeme.selectedImgId', gMeme.selectedImgId)
@@ -72,7 +74,7 @@ function changeLine(val) {
 
 
 
-function getImgs() { 
+function getImgs() {
     var imgs
     const startIdx = gPageIdx * PAGE_SIZE
     imgs = gImgs.slice(startIdx, startIdx + PAGE_SIZE)
@@ -82,24 +84,37 @@ function getImgs() {
 function nextPage() {
     gPageIdx++
     if (gPageIdx * PAGE_SIZE >= gImgs.length) {
-      gPageIdx = 0
+        gPageIdx = 0
     }
     window.scrollTo(0, 0)
-  }
-
-function saveMeme(){ 
-    gMemes.push(gMeme)
-    _saveMemesToStorage()
 }
 
-function _saveMemesToStorage() { 
-    localStorage.clear();
+function saveMeme() {
+    gMemes.push(gMeme)
+    _saveMemesToStorage()
+    console.log(gMemes)
+}
+
+function _saveMemesToStorage() {
+    // localStorage.clear();
     saveToStorage(STORAGE_KEY, gMemes)
 }
 
-function getMemes(){ 
+
+function loadSavedMemes() { 
+   gMemes = loadFromStorage(STORAGE_KEY) 
+   if (!gMemes) {
+    gMemes = []
+   }
+}
+function getMemes() {
     var memes
     const startIdx = gPageIdx * PAGE_SIZE
     memes = gMemes.slice(startIdx, startIdx + PAGE_SIZE)
     return memes
+}
+
+function clearSaved(){ 
+    localStorage.clear()
+    gMemes.splice(0, gMemes.length)
 }

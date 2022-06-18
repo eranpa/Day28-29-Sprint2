@@ -1,11 +1,15 @@
-.saved{
+.saved {
     flex-direction: column;
+    width: 100%;
     justify-content: center;
     align-items: center;
 }
 
-.saved-container{
-  
+.saved-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: warp;
     justify-content: center;
     font-family: Impact;
     grid-template-columns: repeat(3, 250px);
@@ -13,11 +17,12 @@
     /* margin-bottom: 2rem; */
 }
 
-.next-meme-btn{ 
+.next-meme-btn {
     margin-top: 0.75rem;
     margin-bottom: 0.75rem;
 }
-.gallery-image-container{
+
+.gallery-image-container {
     max-width: 100%;
     border-radius: 10px;
     position: relative;
