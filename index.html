@@ -11,10 +11,10 @@
 
 <body onload="init()">
 
-    <section class="header-container ">
+    <section class="header-container">
         <header class="main-header main-layout flex align-center space-between">
             <div class="main-logo"><img src="./images/misc/LOGO.png" alt=""></div>
-            <ul class="main-nav flex clen-list align-center space-around">
+            <ul class="main-nav flex clen-list align-center">
                 <li class="nav-link flex align-center nav-btn" onclick="onGallery()"> Gallery</li>
                 <li class="nav-link flex align-center nav-btn"> about</li>
                 <li class="nav-link flex align-center nav-btn" onclick="onSaved()">saved</li>
@@ -28,10 +28,13 @@
             <div class="gallery-container grid main-layout "></div>
             <button class="next-meme-btn btn-round" onclick="onNextPage()">More meme options</button>
         </section>
-      
+
         <section class="saved flex align-center hidden">
-            <div><button class="clear-btn btn-round" onclick="onClear()">clear saved memes</button></div>
-            <div class="saved-container main-layout "></div>
+            <div class="emptyDb-msg hidden">
+                <h2>It seems like you have no saved memes</h2>
+            </div>
+            <div><button class="clear-btn grid btn-round" onclick="onClear()">clear saved memes</button></div>
+            <div class="saved-container grid main-layout "></div>
         </section>
 
 
@@ -47,48 +50,65 @@
                     placeholder="Your text here">
 
                 <div class="control-btns grid main-layout">
-                    <button class="controller font-size-btn-up btn-round" onclick="OnChangeFontSize(1)">A+</button>
-                    <button class="controller font-size-btn-down btn-round" onclick="OnChangeFontSize(-1)">A-</button>
 
-                    <button class="controller btn-round addline-btn" onclick="onAddLine()">+</button>
-
-                    <button class="controller btn-round change-line-btn" onclick="onChangeLine(1)">↑</button>
-                    <button class="controller btn-round controller change-line-btn"
-                        onclick="onChangeLine(-1)">↓</button>
-
-
-
-
-                    <button class="controller btn-round remove-line-btn" onclick="onRemoveLine()">&#128465</button>
-
-
-                    <div class="controller btn-round color-picker">color:
-                        <input class="controller color-input" type="color" value="#ffffff" onchange="onSetColor(value)">
+                    <div class="controller font-size-btn-up" onclick="OnChangeFontSize(1)"><img
+                            src="./images/icons/increase font - icon.png" alt="">
                     </div>
-                    <button class="controller btn-round save-btn" onclick="onSaveMeme()">&#128190</button>
-                    
-                    <button class="controller btn-round" onclick="uploadImg()">Upload</button>
-                
-                    
+                    <div class="controller font-size-btn-down" onclick="OnChangeFontSize(-1)"><img
+                            src="./images/icons/decrease font - icon.png" alt="">
+                    </div>
+                    <div class="controller addline-btn" onclick="onAddLine()"><img src="./images/icons/add.png" alt="">
+                    </div>
+                    <div class="controller change-line-btn" onclick="onChangeLine(1)"><img
+                            src="./images/icons/up-and-down-opposite-double-arrows-side-by-side.png">
+                    </div>
+                    <div class="controller remove-line-btn" onclick="onRemoveLine()"><img
+                            src="./images/icons/trash.png">
+                    </div>
+                    <div class="controller save-btn" onclick="onSaveMeme()"><img src="./images/icons/floopy.png" alt="">
+                    </div>
+                    <div class="controller upload-btn" onclick="uploadImg()"><img
+                            src="./images/icons/facebook-logo.png">
+                    </div>
+
+                    <div class="controller download-btn"><a href="#" class="btn" onclick="downloadImg(this)"
+                            download="my-img.jpg"><img src="./images/icons/download.png" alt=""></a>
+                    </div>
+
+                    <div class="controller color-picker">
+                        <label for="create-color">
+                            <img src="./images/icons/paint-board-and-brush.png" alt="">
+                            <input type="color" id="create-color" style="display: none" value="#ffffff"
+                                onchange="onSetColor(value)">
+                        </label>
+                    </div>
+
+                    <div class="sticker-container flex">
+                        <button class="controller nav-sticker stickerleft" onclick="onStickerArrow(-1)"><img src="./images/icons/left-arrow.png" alt=""></button>
+                        <div class="controller sticker-disp"></div>
+                        <button class="controller nav-sticker sticker-right" onclick="onStickerArrow(+1)"><img src="./images/icons/right-arrow.png" alt=""></button>
+                    </div>
 
                 </div>
-                <div class="user-meg"><p class="user-msg"></p></div>
-                <div class="share-container"></div> 
+                <div class="user-meg">
+                    <p class="user-msg"></p>
+                </div>
+                <div class="share-container"></div>
             </div>
         </section>
     </main>
     <footer class="footer">
         <div class="main-logo"><img src="./images/misc/LOGO.png" alt=""></div>
         <h1> &#169 Eran Pascal for Coding Academy</h1>
-        
-        
-        
-        
-    </footer>x
-    
+
+
+
+
+    </footer>
+
     <script src="./js/storage.service.js"></script>
     <script src="js/upload-service.js"></script>
-    
+
     <script src="./js/canvas.service.js"></script>
     <script src="./js/line.service.js"></script>
     <script src="./js/meme.service.js"></script>

@@ -47,3 +47,8 @@ function deleteLine() {
     gMeme.lines.splice(lineIdx, 1)
     setSelectedLineIdx(gMeme.lines.length - 1)
 }
+
+function addSticker(sticker){
+    addLine(sticker)
+    renderMeme()
+}

@@ -10,7 +10,7 @@
     font-family: Impact;
     grid-template-columns: repeat(3, 250px);
     grid-gap: 10px;
-    /* margin-bottom: 2rem; */
+  
 }
 
 .next-btn{ 

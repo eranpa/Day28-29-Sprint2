@@ -6,15 +6,3 @@
 .fa.fa-remove::before {
     content: "\f2ed";
 }
-.control-btns a{
-    margin: 0 0.5rem;
-    display: flex;
-    text-decoration: none;
-    justify-content: center;
-    align-items: center;
-    width: 2.5rem;
-    height: 2.5rem;
-    color: white;
-    margin-bottom: 5rem;
-    background-color: var(--clr6);
-}

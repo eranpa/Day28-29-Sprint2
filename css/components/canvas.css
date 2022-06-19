@@ -3,14 +3,11 @@
     text-align: center;
     flex-direction: row;
     flex-wrap: wrap;
-    margin-bottom: 130px;
+    margin-bottom: 2rem;
 }
 
 .canvas-container{
     font-family: impact;
-    /* outline: 0.5px solid black; */
-    /* border-radius:8%; */
-
 }
 
 

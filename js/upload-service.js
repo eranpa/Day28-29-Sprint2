@@ -42,4 +42,10 @@ function doUploadImg(imgDataUrl, onSuccess) {
 
 
 
+function downloadImg(elLink){
+    setSelectedLineIdx(-1)
 
+    
+    var imgContent = gCanvas.toDataURL('image/jpeg')
+    elLink.href = imgContent
+}

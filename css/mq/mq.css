@@ -3,7 +3,7 @@
 
     /*header*/
     .menu-toggle-btn {
-        visibility: hidden;
+        display: none;
     }
 
 
@@ -32,12 +32,12 @@
 
     .control-btns .controller {
       
-        font-size: 1.5rem;
+        font-size: 3rem;
     }
     .controller.line-input {
         width: 80%;
-        height: fit-content;
         font-size: 1rem;
+        margin-bottom: 0.5rem;
     
     }
 }
@@ -50,6 +50,7 @@
     .header-container {
         display: flex;
         justify-content: center;
+        margin-bottom:2.5rem;
     }
 
     /*logo */
@@ -58,8 +59,8 @@
     }
 
     .header-container .main-header .menu-toggle-btn {
-        position: fixed;
-        visibility: visible;
+        /* position: fixed; */
+        display: block;
         color: var(--clr3);
         font-size: 1.5rem;
         right: 1.25rem;
@@ -86,13 +87,10 @@
 
     }
 
-    body.menu-open .header-container .main-header .menu-toggle-btn {
-        visibility: hidden;
-    }
 
     body.menu-open .header-container .main-header .menu-toggle-btn:after {
         content: 'X';
-        visibility: visible;
+        display: block; 
         top: 0.5rem;
         font-size: 1.5rem;
         right: 1rem;

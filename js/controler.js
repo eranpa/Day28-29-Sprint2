@@ -6,6 +6,8 @@ var gElEditor
 var gElSaved
 var elSavedContainer
 var elGallery
+var gStickersIdx = 0
+var elStickerContainer
 
 function init() {
     gCanvas = document.getElementById('my-canvas')
@@ -15,7 +17,7 @@ function init() {
     elGallery = document.querySelector('.gallery')
     gElEditor = document.querySelector('.editor')
     gElSaved = document.querySelector('.saved')
-    loadSavedMemes() 
+    loadSavedMemes()
     renderGallery()
     SetGMeme()
     addMouseListeners()
@@ -40,7 +42,7 @@ function renderGallery() {
 }
 
 function renderMeme(meme = getMeme()) {
- 
+
     var img = new Image()
     img.src = getImgSrcById(meme.selectedImgId)
     img.onload = () => {
@@ -79,10 +81,11 @@ function drawText(line, ctx) {
 }
 
 function onImgSelect(imgId) {
+    setImg(imgId)
+    renderStickers()
+    renderMeme()
     elGallery.classList.add('hidden')
     gElEditor.classList.remove('hidden')
-    setImg(imgId)
-    renderMeme()
 }
 
 function OnChangeFontSize(val) {
@@ -192,71 +195,138 @@ function onSaved() {
 }
 
 function renderSavedMemes() {
+
     clearSavedHtml()
     var memes = getMemes()
+ 
+    if (!memes.length) {
+        dispNoSaveMemes()
+        return
+    } else { hideNoSavedMemes() }
 
-    console.log('inside render', memes)
+  
     memes.forEach((meme, index) => {
-        const localCanvas = document.createElement('canvas')
-        
-        localCanvas.height = 500
-        localCanvas.width = 500
-        localCanvas.id = 'memeCanvas'
-        var elMemeCanvas = document.querySelector('#memeCanvas')
-        var elMemeCtx = localCanvas.getContext('2d')
-        var img = new Image()
-        img.src = getImgSrcById(meme.selectedImgId)
-        img.onload = () => {
-       
-        elMemeCtx.drawImage(img, 0, 0, elMemeCanvas.width, elMemeCanvas.height)
-       
-        meme.lines.forEach((line) => {
-            drawText(line, elMemeCtx)
-        })
-    }
-        elSavedContainer.appendChild(localCanvas)
-
-        localCanvas.addEventListener('click', () => {
-            onMemeSelect(gMemes[index])
-        })
+        const img = document.createElement('img')
+        img.src = meme.url
+        img.classList.add('saved-image')
+        img.classList.add(`saved-img${index}`)
+        elSavedContainer.appendChild(img)
+        img.addEventListener('click', () => {
+            onMemeSelect(meme)
+        }
+        )
     })
-
 }
 
 
-function onGallery(){
+
+function onGallery() {
     SetGMeme()
     document.getElementById('item').value = ''
     elGallery.classList.remove('hidden')
     gElEditor.classList.add('hidden')
     gElSaved.classList.add('hidden')
-   clearShareMsg()
+    clearShareMsg()
 }
 
-function onClear(){
+function onClear() {
     console.log('clear')
     clearSaved()
 
 }
 
-function clearSaved(){ 
+function clearSaved() {
     localStorage.clear()
     gMemes = []
     renderSavedMemes()
+    dispNoSaveMemes()
 }
 
-function onMemeSelect(meme) { 
-    
+function onMemeSelect(meme) {
+
     elGallery.classList.add('hidden')
     gElSaved.classList.add('hidden')
     gElEditor.classList.remove('hidden')
     gMeme = meme
     renderMeme(meme)
-    }
-
-function clearShareMsg(){
-    document.querySelector('.user-msg').innerText = ''
-    
-    document.querySelector('.share-container').innerHTML = ''
-   
 }
+
+function clearShareMsg() {
+    document.querySelector('.user-msg').innerText = ''
+
+    document.querySelector('.share-container').innerHTML = ''
+
+}
+
+
+function dispNoSaveMemes() {
+    let elEmptyMsg = document.querySelector('.emptyDb-msg')
+    let elCLearBtn = document.querySelector('.clear-btn')
+    elEmptyMsg.classList.remove('hidden')
+    elCLearBtn.classList.add('hidden')
+
+}
+
+function hideNoSavedMemes() {
+    let elEmptyMsg = document.querySelector('.emptyDb-msg')
+    let elCLearBtn = document.querySelector('.clear-btn')
+    elEmptyMsg.classList.add('hidden')
+    elCLearBtn.classList.remove('hidden')
+
+}
+
+function onDownload(elLink) {
+    downloadImg(elLink)
+}
+
+
+/* stickers */
+const gStickers =
+    ['😀', '😁', '😂', '🤣','😃', '😄','😅','😆','😎','😍','💩','🤮','🍉', '🥝', '🥓', '🍕'] 
+
+function renderStickers(){
+
+    clearStickerDisp()
+    const stickers = getStickers()
+    elStickerContainer = document.querySelector('.sticker-disp')
+    stickers.forEach(sticker => {
+        const span = document.createElement('span')
+        
+        span.innerText = sticker
+
+        elStickerContainer.appendChild(span)
+        span.addEventListener('click' , () => {
+            onStickerSelect(span.innerText)
+    })
+})}
+
+
+function getStickers(){    
+    const startIdx = gStickersIdx * 4
+    const stickers = gStickers.slice(startIdx, startIdx + 4)
+    return stickers
+}
+
+function onStickerSelect(sticker) { 
+    addSticker(sticker)
+}
+
+function onStickerArrow(value) { 
+    gStickersIdx += value
+    clearStickerDisp()
+    if (gStickersIdx === -1) {
+        gStickersIdx = (gStickers.length - 4)/4 
+    }
+    if (gStickersIdx * 4 >= gStickers.length) {
+        gStickersIdx = 0
+    }
+    renderStickers()
+
+}
+
+function clearStickerDisp() { 
+        elStickerContainer = document.querySelector('.sticker-disp')
+        while (elStickerContainer.firstChild) {
+            elStickerContainer.removeChild(elStickerContainer.firstChild)
+        }
+} 

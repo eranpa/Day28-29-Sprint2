@@ -90,6 +90,10 @@ function nextPage() {
 }
 
 function saveMeme() {
+    setSelectedLineIdx(-1)
+    // console.log('saved gmeme', gMeme)
+    renderMeme()
+    gMeme.url = gCanvas.toDataURL("image/jpeg")
     gMemes.push(gMeme)
     _saveMemesToStorage()
     console.log(gMemes)
@@ -117,4 +121,8 @@ function getMemes() {
 function clearSaved(){ 
     localStorage.clear()
     gMemes.splice(0, gMemes.length)
+}
+
+function createUrl() { 
+    return gCanvas.toDataURL("image/jpeg")
 }
