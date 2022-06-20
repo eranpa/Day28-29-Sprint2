@@ -30,7 +30,7 @@ header {
 }
 
 .main-nav .nav-link.nav-btn{
-    font-family: Montserrat;
+    font-family: montserrat;
     display: flex;
     color: var(--clr3);
     align-items: center;
